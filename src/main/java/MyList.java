@@ -32,11 +32,17 @@ public class MyList<String> implements List<String> {
 
     @Override
     public String get(int index) {
+        if(index < 0 || index >= size){
+            throw new IndexOutOfBoundsException();
+        }
         return array[index];
     }
 
     @Override
     public String set(int index, String element) {
+        if(index < 0 || index >= size){
+            throw new IndexOutOfBoundsException();
+        }
         return array[index] = element;
     }
 
