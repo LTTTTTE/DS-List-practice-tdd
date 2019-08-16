@@ -84,7 +84,7 @@ public class MyList<String> implements List<String> {
     public boolean add(String string) {
         if(size >= array.length){
             String[] newArray = (String[]) new Object[size * 2];
-            System.arraycopy(array,0, newArray,0, size);
+            System.arraycopy(array,0, newArray,0, array.length);
             array = newArray;
         }
         array[size++] = string;
