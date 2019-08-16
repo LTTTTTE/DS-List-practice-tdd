@@ -68,7 +68,7 @@ public class MyList<String> implements List<String> {
 
     @Override
     public boolean contains(Object o) {
-        return indexOf(o) > 0;
+        return indexOf(o) >= 0;
     }
 
     @Override
@@ -82,7 +82,13 @@ public class MyList<String> implements List<String> {
 
     @Override
     public boolean add(String string) {
-        return false;
+        if(size >= array.length){
+            String[] newArray = (String[]) new Object[size * 2];
+            System.arraycopy(array,0, newArray,0, array.length);
+            array = newArray;
+        }
+        array[size++] = string;
+        return true;
     }
 
     @Override
