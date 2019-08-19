@@ -93,17 +93,41 @@ public class MyList<String> implements List<String> {
 
     @Override
     public void add(int index, String element) {
-
+        if(index == size){
+            add(element);
+            return;
+        }
+        if(index < 0 || index >= size){
+            throw new IndexOutOfBoundsException();
+        }
+        if(size >= array.length){
+            String[] newArray = (String[]) new Object[size * 2];
+            System.arraycopy(array,0, newArray,0, array.length);
+            array = newArray;
+        }
+        size++;
+        for(int i = size - 1; i > index; i--){
+            array[i] = array[i - 1];
+        }
+        array[index] = element;
     }
 
     @Override
     public boolean addAll(Collection<? extends String> c) {
-        return false;
+        boolean flag = true;
+            for(String s : c){
+                flag &= add(s);
+            }
+        return flag;
     }
 
     @Override
     public boolean addAll(int index, Collection<? extends String> c) {
-        return false;
+        int beforeSize = size;
+        for(String s : c){
+            add(index++, s);
+        }
+        return beforeSize + c.size() == size;
     }
 
     @Override
@@ -154,5 +178,16 @@ public class MyList<String> implements List<String> {
     @Override
     public <T> T[] toArray(T[] a) {
         return null;
+    }
+
+    public java.lang.String toString(){
+        java.lang.String str = "[";
+        for(int i = 0; i < size; i++){
+            str += array[i];
+            if(i != size -1){
+                str += ", ";
+            }
+        }
+        return str + "]";
     }
 }
