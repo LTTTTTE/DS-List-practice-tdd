@@ -91,4 +91,41 @@ public class MyListTest {
         assertThat(myList.toString()).isEqualTo("[10, 20, 30, 40, 50, 5, 8, 88, 99, 60, 70, 80, 90]");
     }
 
+    @Test
+    public void testRemove(){
+        myList.remove("20");
+        assertThat(myList.size()).isEqualTo(8);
+        assertThat(myList.toString()).isEqualTo("[10, 30, 40, 50, 60, 70, 80, 90]");
+
+        myList.remove("10");
+        assertThat(myList.size()).isEqualTo(7);
+        assertThat(myList.toString()).isEqualTo("[30, 40, 50, 60, 70, 80, 90]");
+    }
+
+    @Test
+    public void testRemoveIndex(){
+        myList.remove(8);
+        assertThat(myList.size()).isEqualTo(8);
+        assertThat(myList.toString()).isEqualTo("[10, 20, 30, 40, 50, 60, 70, 80]");
+
+        myList.remove(6);
+        assertThat(myList.size()).isEqualTo(7);
+        assertThat(myList.toString()).isEqualTo("[10, 20, 30, 40, 50, 60, 80]");
+    }
+
+    @Test
+    public void testRemoveAll(){
+        ArrayList<String> strings = new ArrayList<>(Arrays.asList("20", "10", "80", "90"));
+        myList.removeAll(strings);
+        assertThat(myList.size()).isEqualTo(5);
+        assertThat(myList.toString()).isEqualTo("[30, 40, 50, 60, 70]");
+    }
+
+    @Test
+    public void testRetainAll(){
+        ArrayList<String> strings = new ArrayList<>(Arrays.asList("20", "10", "80", "90"));
+        myList.retainAll(strings);
+        assertThat(myList.size()).isEqualTo(4);
+
+    }
 }
