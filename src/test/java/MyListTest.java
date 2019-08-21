@@ -67,11 +67,28 @@ public class MyListTest {
     public void testAddIndex(){
         myList.add(0,"5");
         myList.add(1,"8");
-        myList.add(myList.size()-2,"88");
-        myList.add(myList.size()-1,"99");
+        myList.add(10,"88");
+        myList.add(12,"99");
         assertThat(myList.size()).isEqualTo(13);
         assertThat(myList.containsAll(new ArrayList<>(Arrays.asList("5","8","88","99"))))
                 .isTrue();
+        assertThat(myList.toString()).isEqualTo("[5, 8, 10, 20, 30, 40, 50, 60, 70, 80, 88, 90, 99]");
+    }
+
+    @Test
+    public void testAddAll(){
+        ArrayList<String> arrayList = new ArrayList<>(Arrays.asList("5", "8", "88", "99"));
+        myList.addAll(arrayList);
+        assertThat(myList.containsAll(arrayList));
+        System.out.println(myList.toString());
+    }
+
+    @Test
+    public void testAddAllIndex(){
+        ArrayList<String> arrayList = new ArrayList<>(Arrays.asList("5", "8", "88", "99"));
+        myList.addAll(5,arrayList);
+        assertThat(myList.size()).isEqualTo(13);
+        assertThat(myList.toString()).isEqualTo("[10, 20, 30, 40, 50, 5, 8, 88, 99, 60, 70, 80, 90]");
     }
 
 }
