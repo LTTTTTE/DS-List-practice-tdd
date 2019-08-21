@@ -132,17 +132,32 @@ public class MyList<String> implements List<String> {
 
     @Override
     public boolean remove(Object o) {
-        return false;
+        int beforeSize = size;
+        remove(indexOf(o));
+        return size == beforeSize + 1;
     }
 
     @Override
     public String remove(int index) {
-        return null;
+        if(index < 0 || index >= size){
+            throw new IndexOutOfBoundsException();
+        }
+        String before = array[index];
+
+        for(int i = index; i < size - 1; i++){
+            array[i] = array[i + 1];
+        }
+        size--;
+        return before;
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        boolean flag = true;
+        for(Object s : c){
+            flag &= remove(s);
+        }
+        return flag;
     }
 
     @Override
